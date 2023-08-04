@@ -1,11 +1,21 @@
 units:
   choc: 13.8
+  # for mirror -- soo somehow this works?
+  rotation: -15
+  distance: -23 #18 keys + gap
+  kicadx: 250
+  kicady: -100
+  # and this works now too.... I don't get it bruh
+  # rotation: 5
+  # distance: 214.162 #230 - 20,838 + 5
+  # kicadx: 100
+  # kicady: -200
 
 points:
   zones:
     matrix:
-      anchor.shift: [100, -100]  # Fix placement on KiCAD sheet
-      rotate: 5
+      anchor.shift: [kicadx, kicady]  # Fix placement on KiCAD sheet
+      rotate: rotation
       columns:
         pinky:
           key:
@@ -13,18 +23,18 @@ points:
             splay: 15
             origin: [0, -17]
           rows:
-            bottom:
-              bind: [5, 0, 0, 0]
-              column_net: P7
-              mirror.column_net: m_P7
-            home:
-              bind: [0, 12, 0, 0]
-              column_net: P6
-              mirror.column_net: m_P6
             top:
               bind: [0, 8, 5, 0]
               column_net: P5 
               mirror.column_net: m_P5
+            home:
+              bind: [5, 12, 0, 0]
+              column_net: P6
+              mirror.column_net: m_P6
+            bottom:
+              bind: [7, 0, 0, 0]
+              column_net: P7
+              mirror.column_net: m_P7
         ring:
           key:
             spread: 18
@@ -32,18 +42,18 @@ points:
             splay: -10
             origin: [0, -17]
           rows:
-            bottom:
-              bind: [0, 0, 0, 10]
-              column_net: P4
-              mirror.column_net: m_P4
-            home:
-              bind: [5, 0, 5, 0]
-              column_net: P3
-              mirror.column_net: m_P3
             top:
               bind: [0, 5, 0, 0]
               column_net: P0
               mirror.column_net: m_P0
+            home:
+              bind: [5, 0, 5, 0]
+              column_net: P3
+              mirror.column_net: m_P3
+            bottom:
+              bind: [0, 0, 0, 10]
+              column_net: P4
+              mirror.column_net: m_P4
         middle:
           key:
             # shift: [0.2, 0]
@@ -71,37 +81,38 @@ points:
             splay: -5
             origin: [0, -17]
           rows:
-            bottom:
-              bind: [0, 5, 0, 0]
-              column_net: P15
-              mirror.column_net: m_P15
-            home:
-              bind: [5, 0, 5, 0]
-              column_net: P14
-              mirror.column_net: m_P14
             top:
               bind: [0, 0, 0, 6]
               column_net: P16
               mirror.column_net: m_P16
+            home:
+              bind: [5, 0, 5, 0]
+              column_net: P14
+              mirror.column_net: m_P14
+            bottom:
+              bind: [0, 5, 0, 0]
+              column_net: P15
+              mirror.column_net: m_P15
         inner:
           key:
             spread: 18
             stagger: -17/9
             origin: [0, -17]
           rows: 
+            top:
+              bind: [0, 0, 7, 5]
+              column_net: P21
+              mirror.column_net: m_P21
+            home:
+              # bind: [0, 19, 0, 5]
+              bind: [7, 0, 7, 5]
+              column_net: P20
+              mirror.column_net: m_P20
             bottom:
-              bind: [5, 19, 20, 0]
+              bind: [7, 0, 11, 0]
               # bind: [5, 19, 20, 0]
               column_net: P10
               mirror.column_net: m_P10
-            home:
-              bind: [0, 19, 0, 5]
-              column_net: P20
-              mirror.column_net: m_P20
-            top:
-              bind: [0, 0, 5, 5]
-              column_net: P21
-              mirror.column_net: m_P21
       rows:
         bottom:
           padding: 17
@@ -120,7 +131,7 @@ points:
             only:
               column_net: P8
               mirror.column_net: m_P8
-              bind: [10, 1, 0, 0]
+              bind: [0, 1, 0, 0]
         second:
           key:
             spread: 18
@@ -137,32 +148,56 @@ points:
       key:
         footprints:
   mirror:
-    ref: matrix_inner_home
-    distance: 65
+    ref: matrix_pinky_home
+    distance: distance
+
+# ------------------
+# ---- OUTLINES ----
+# ------------------
 outlines:
   switches:
     - what: rectangle
       where: true
       bound: true
-      asym: left
+      asym: both
       size: [18,17]
       corner: 2
-  first:
-    - what: outline
-      name: switches
-      fillet: 2
-  second:
-    - what: outline
-      name: first
-      fillet: 2
-  third:
-    - what: outline
-      name: second
-      fillet: 2
-  panel:
-    - what: outline
-      name: third
-      fillet: 2
+
+  mcu_left:
+    - what: polygon
+      # operation: stack
+      points:
+        - ref: matrix_inner_home
+          shift: [7,8.5]
+          # shift: [9,8.5]
+        - ref: matrix_inner_home
+          shift: [28,8.5]
+        - ref: matrix_inner_home
+          shift: [28,-45]
+        - ref: matrix_inner_home
+          shift: [7,-45]
+          # shift: [9,-45]
+  mcu_right:
+    - what: polygon
+      # operation: stack
+      points:
+        - ref: mirror_matrix_inner_home
+          shift: [7,8.5]
+          # shift: [9,8.5]
+        - ref: mirror_matrix_inner_home
+          shift: [28,8.5]
+        - ref: mirror_matrix_inner_home
+          shift: [28,-45]
+        - ref: mirror_matrix_inner_home
+          shift: [7,-45]
+          # shift: [9,-45]
+  # mcu_left:
+  #   - what: rectangle
+  #     size: [19,40]
+  #     where:
+  #       ref: matrix_inner_home
+  #       shift: [18, 0]
+
   # ---- PLATE ----
   cutout_switch_plate:
     - what: rectangle
@@ -170,20 +205,83 @@ outlines:
       bound: false
       size: [choc, choc]
 
+  thumb_left:
+    - what: polygon
+      # operation: stack
+      points:
+        - ref: matrix_inner_bottom
+          shift: [9,-8.5]
+        - ref: matrix_inner_bottom
+          shift: [28,-8.5]
+        - ref: matrix_inner_home
+          shift: [28,-45]
+        - ref: matrix_inner_home
+          shift: [9,-45]
+
+  thumb_right:
+    - what: polygon
+      # operation: stack
+      points:
+        - ref: mirror_matrix_inner_bottom
+          shift: [9, -8.5]
+        - ref: mirror_matrix_inner_bottom
+          shift: [28, -8.5]
+        - ref: mirror_matrix_inner_home
+          shift: [28, -45]
+        - ref: mirror_matrix_inner_home
+          shift: [9, -45]
+
+  # ---- BOTTOM PLATE ----
+  sockets:
+    - what: rectangle
+      where: true
+      bound: false
+      size: [15, 7.2]
+      adjust:
+        shift: [2.5, 4.8]
+
+  # ---- PCB ----
   pcb: [
     +switches,
+    +mcu_left,
+    +mcu_right,
+  ]
+  pcb_rounded:
+    - what: outline
+      name: pcb
+      fillet: 2
+
+  # ---- PLATE ----
+  plate_bare: [
+    +switches,
+    +thumb_left,
+    +thumb_right,
   ]
 
+  plate_bare_rounded:
+    - what: outline
+      name: plate_bare
+      fillet: 2
+
   plate: [
-    +switches,
+    +plate_bare_rounded,
     -cutout_switch_plate,
   ]
 
+  # ---- BOTTOM PLATE ----
+  bottom_plate: [
+    +pcb_rounded,
+    # -sockets,
+  ]
+
+# ------------------
+# ------ PCBS ------
+# ------------------
 pcbs:
   radar:
     outlines:
       main:
-        outline: panel
+        outline: pcb_rounded
     footprints:
       choc_hotswap:
         what: choc
@@ -373,6 +471,7 @@ pcbs:
         where:
           ref: mirror_matrix_index_top
           shift: [-11.25, -0]
+
   # ---- PLATE ----
   radar_plate:
     outlines:
@@ -380,6 +479,49 @@ pcbs:
         outline: plate
         layer: Edge.Cuts
     footprints:
+      # ---- MOUNTING HOLES ----
+      mountinghole_thumb:
+        what: mountinghole
+        where:
+          ref: matrix_inner_bottom
+          shift: [24, -20.5]
+      mountinghole_pinky:
+        what: mountinghole
+        where:
+          ref: matrix_pinky_top
+          shift: [12.3, 5]
+      mountinghole_mid:
+        what: mountinghole
+        where:
+          ref: matrix_index_top
+          shift: [-11.25, -0]
+      mirror_mountinghole_thumb:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_inner_bottom
+          shift: [24, -20.5]
+      mirror_mountinghole_pinky:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_pinky_top
+          shift: [12.3, 5]
+      mirror_mountinghole_mid:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_index_top
+          shift: [-11.25, -0]
+
+  # ---- BOTTOM PLATE ----
+  radar_bottom_plate:
+    outlines:
+      main:
+        outline: bottom_plate
+        layer: Edge.Cuts
+    footprints:
+      # Components for the solder holes
+      choc_hotswap:
+        what: choc_cutout
+        where: true
       # ---- MOUNTING HOLES ----
       mountinghole_thumb:
         what: mountinghole
