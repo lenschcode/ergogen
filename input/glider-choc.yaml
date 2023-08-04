@@ -1,0 +1,184 @@
+units:
+  kx: cx            # 18mm Choc X spacing
+  ky: cy            # 17mm Choc y spacing
+  py: 0.2ky
+  split_space: 8kx  # space between home rows
+
+points:
+  zones:
+    matrix:
+      anchor:
+        shift: [4kx, -8ky]
+      columns:
+        pinky:
+          key:
+            stagger: 0
+            column_net: GP6
+            mirror.column_net: GP28
+        ring:
+          key:
+            stagger: 0
+            column_net: GP7
+            mirror.column_net: GP27
+        middle:
+          key:
+            stagger: 0
+            column_net: GP8
+            mirror.column_net: GP26
+        index:
+          key:
+            stagger: 0
+            column_net: GP9
+            mirror.column_net: GP22
+        inner:
+          key:
+            stagger: 0
+            column_net: GP10
+            mirror.column_net: GP21
+      rows:
+        bottom:
+          row_net: GP5
+        home:
+          row_net: GP4
+        top:
+          row_net: GP3
+    thumbfan:
+      anchor:
+        ref: matrix_index_bottom
+        shift: [0, -1.25ky]
+      columns:
+        near:
+          key:
+            column_net: GP8
+            mirror.column_net: GP26
+        home:
+          key:
+            column_net: GP9
+            mirror.column_net: GP22
+        far:
+          key:
+            column_net: GP10
+            mirror.column_net: GP21
+      rows:
+        home:
+          row_net: GP2
+  key:
+    padding: 1ky
+    spread: 1kx
+  mirror: &mirror
+    ref: matrix_inner_home
+    distance: split_space
+
+outlines:
+  _switches:
+    - what: rectangle
+      where: true
+      size: 14
+      bound: false
+  glider-choc-bottom-plate:
+    - what: polygon
+      points:
+        # NE
+        - ref: mirror_matrix_pinky_top
+          shift: [-0.6kx, 0.6ky]
+        # SE
+        - ref: mirror_matrix_pinky_bottom
+          shift: [-0.6kx, -0.6ky - py]
+        - ref: mirror_matrix_index_bottom
+          shift: [-0.6kx, -0.6ky - py]
+        - ref: mirror_thumbfan_near_home
+          shift: [-0.6kx, -0.6ky]
+        # SW
+        - ref: thumbfan_near_home
+          shift: [-0.6kx, -0.6ky]
+        - ref: matrix_index_bottom
+          shift: [-0.6kx, -0.6ky - py]
+        - ref: matrix_pinky_bottom
+          shift: [-0.6kx, -0.6ky - py]
+        # NW
+        - ref: matrix_pinky_top
+          shift: [-0.6kx, 0.6ky]
+      fillet: 4
+
+pcbs:
+  glider-choc:
+    outlines:
+      main:
+        outline: glider-choc-bottom-plate
+        footprints:
+    footprints:
+      choc:
+        what: choc
+        where: true
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+        adjust:
+          rotate: 180
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, 5]
+          rotate: 180
+      pico:
+        what: weact_pi_pico
+        where:
+          ref: matrix_inner_home
+          shift: [split_space / 2, 1.2]
+      version_text:
+        what: text 
+        where:
+          ref: matrix_inner_top
+          shift: [split_space / 2, 0.25ky]
+        params:
+          text: 'glider v0.1.0'
+      jlc_text:
+        what: text 
+        where:
+          ref: matrix_inner_top
+          shift: [split_space / 2, -0.75ky]
+        params:
+          text: 'JLCJLCJLCJLC'
+      mountinghole_center:
+        what: mountinghole
+        where:
+          ref: matrix_inner_top
+          shift: [split_space / 2, -0.25ky]
+      mountinghole_sw:
+        what: mountinghole
+        where:
+          ref: matrix_pinky_bottom
+          shift: [0.5kx, 0.5ky]
+      mountinghole_sw_mirror:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_pinky_bottom
+          shift: [0.5kx, 0.5ky]
+      mountinghole_ne:
+        what: mountinghole
+        where:
+          ref: matrix_index_home
+          shift: [0.5kx, 0.5ky]
+      mountinghole_ne_mirror:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_index_home
+          shift: [0.5kx, 0.5ky]
+      mountinghole_thumbfan:
+        what: mountinghole
+        where:
+          ref: thumbfan_home_home
+          shift: [0.5kx, 0.5ky]
+      mountinghole_thumbfan_mirror:
+        what: mountinghole
+        where:
+          ref: mirror_thumbfan_home_home
+          shift: [0.5kx, 0.5ky]
+
