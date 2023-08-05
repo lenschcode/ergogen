@@ -1,15 +1,15 @@
 units:
   choc: 13.8
   # for mirror -- soo somehow this works?
-  rotation: -15
-  distance: -23 #18 keys + gap
-  kicadx: 250
-  kicady: -100
+  # rotation: -15
+  # distance: -23 #18 keys + gap
+  # kicadx: 250
+  # kicady: -100
   # and this works now too.... I don't get it bruh
-  # rotation: 5
-  # distance: 214.162 #230 - 20,838 + 5
-  # kicadx: 100
-  # kicady: -200
+  rotation: 5
+  distance: 214.162 #230 - 20,838 + 5
+  kicadx: 100
+  kicady: -200
 
 points:
   zones:
@@ -124,7 +124,7 @@ points:
         ref: matrix_inner_bottom
         shift: [-1,-24]
       columns:
-        first:
+        inner:
           key:
             splay: -15
           rows:
@@ -132,7 +132,7 @@ points:
               column_net: P8
               mirror.column_net: m_P8
               bind: [0, 1, 0, 0]
-        second:
+        outer:
           key:
             spread: 18
             splay: -10
@@ -387,16 +387,27 @@ pcbs:
       #     to: Bat+
       # ---- RESET SWITCH ----
       reset_switch:
-        what: switch_reset
-        # what: button
+        # what: switch_reset
+        what: b3u1000p
         where:
           ref: matrix_inner_home
-          shift: [19, -26]
+          shift: [19, -27]
           rotate: 0
         params:
-          # reversible: true 
+          reversible: false 
           from: RST  
           to: GND
+      mirror_reset_switch:
+        # what: switch_reset
+        what: b3u1000p
+        where:
+          ref: mirror_matrix_inner_home
+          shift: [19, -27]
+          rotate: 0
+        params:
+          reversible: false 
+          from: m_RST  
+          to: m_GND
       # battery:
       #   what: pads
       #   where:
@@ -444,13 +455,20 @@ pcbs:
       mountinghole_thumb:
         what: mountinghole
         where:
-          ref: matrix_inner_bottom
-          shift: [24, -20.5]
-      mountinghole_pinky:
+          # ref: matrix_inner_bottom
+          # shift: [24, -20.5]
+          ref: thumb_inner_only
+          shift: [10.5, 8]
+      mountinghole_pinky_top:
         what: mountinghole
         where:
           ref: matrix_pinky_top
           shift: [12.3, 5]
+      mountinghole_pinky_bot:
+        what: mountinghole
+        where:
+          ref: matrix_ring_bottom
+          shift: [-10, -5]
       mountinghole_mid:
         what: mountinghole
         where:
@@ -459,13 +477,20 @@ pcbs:
       mirror_mountinghole_thumb:
         what: mountinghole
         where:
-          ref: mirror_matrix_inner_bottom
-          shift: [24, -20.5]
-      mirror_mountinghole_pinky:
+          # ref: mirror_matrix_inner_bottom
+          # shift: [24, -20.5]
+          ref: mirror_thumb_inner_only
+          shift: [10.5, 8]
+      mirror_mountinghole_pinky_top:
         what: mountinghole
         where:
           ref: mirror_matrix_pinky_top
           shift: [12.3, 5]
+      mirror_mountinghole_pinky_bot:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_ring_bottom
+          shift: [-10, -5]
       mirror_mountinghole_mid:
         what: mountinghole
         where:
@@ -483,13 +508,18 @@ pcbs:
       mountinghole_thumb:
         what: mountinghole
         where:
-          ref: matrix_inner_bottom
-          shift: [24, -20.5]
-      mountinghole_pinky:
+          ref: thumb_inner_only
+          shift: [10.5, 8]
+      mountinghole_pinky_top:
         what: mountinghole
         where:
           ref: matrix_pinky_top
           shift: [12.3, 5]
+      mountinghole_pinky_bot:
+        what: mountinghole
+        where:
+          ref: matrix_ring_bottom
+          shift: [-10, -5]
       mountinghole_mid:
         what: mountinghole
         where:
@@ -498,13 +528,18 @@ pcbs:
       mirror_mountinghole_thumb:
         what: mountinghole
         where:
-          ref: mirror_matrix_inner_bottom
-          shift: [24, -20.5]
-      mirror_mountinghole_pinky:
+          ref: mirror_thumb_inner_only
+          shift: [10.5, 8]
+      mirror_mountinghole_pinky_top:
         what: mountinghole
         where:
           ref: mirror_matrix_pinky_top
           shift: [12.3, 5]
+      mirror_mountinghole_pinky_bot:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_ring_bottom
+          shift: [-10, -5]
       mirror_mountinghole_mid:
         what: mountinghole
         where:
@@ -526,13 +561,18 @@ pcbs:
       mountinghole_thumb:
         what: mountinghole
         where:
-          ref: matrix_inner_bottom
-          shift: [24, -20.5]
-      mountinghole_pinky:
+          ref: thumb_inner_only
+          shift: [10.5, 8]
+      mountinghole_pinky_top:
         what: mountinghole
         where:
           ref: matrix_pinky_top
           shift: [12.3, 5]
+      mountinghole_pinky_bot:
+        what: mountinghole
+        where:
+          ref: matrix_ring_bottom
+          shift: [-10, -5]
       mountinghole_mid:
         what: mountinghole
         where:
@@ -541,13 +581,18 @@ pcbs:
       mirror_mountinghole_thumb:
         what: mountinghole
         where:
-          ref: mirror_matrix_inner_bottom
-          shift: [24, -20.5]
-      mirror_mountinghole_pinky:
+          ref: mirror_thumb_inner_only
+          shift: [10.5, 8]
+      mirror_mountinghole_pinky_top:
         what: mountinghole
         where:
           ref: mirror_matrix_pinky_top
           shift: [12.3, 5]
+      mirror_mountinghole_pinky_bot:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_ring_bottom
+          shift: [-10, -5]
       mirror_mountinghole_mid:
         what: mountinghole
         where:

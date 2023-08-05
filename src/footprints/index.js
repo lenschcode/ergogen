@@ -26,6 +26,7 @@ module.exports = {
     batterypad: require('./batterypad'),
     nice_nano: require('./nice_nano'),
     choc_cutout: require('./choc_cutout'),
+    b3u1000p: require('./b3u1000p'),
 
     nice_nano_pretty: require('./infused-kim/nice_nano_pretty'),
     nice_view: require('./infused-kim/nice_view'),
