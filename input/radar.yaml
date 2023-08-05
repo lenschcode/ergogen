@@ -122,7 +122,7 @@ points:
     thumb:
       anchor:
         ref: matrix_inner_bottom
-        shift: [-1,-24]
+        shift: [-1,-20]
       columns:
         inner:
           key:
@@ -169,28 +169,24 @@ outlines:
       points:
         - ref: matrix_inner_home
           shift: [7,8.5]
-          # shift: [9,8.5]
         - ref: matrix_inner_home
           shift: [28,8.5]
-        - ref: matrix_inner_home
-          shift: [28,-45]
-        - ref: matrix_inner_home
-          shift: [7,-45]
-          # shift: [9,-45]
+        - ref: matrix_inner_bottom
+          shift: [28,-23]
+        - ref: matrix_inner_bottom
+          shift: [7,-23]
   mcu_right:
     - what: polygon
       # operation: stack
       points:
         - ref: mirror_matrix_inner_home
           shift: [7,8.5]
-          # shift: [9,8.5]
         - ref: mirror_matrix_inner_home
           shift: [28,8.5]
-        - ref: mirror_matrix_inner_home
-          shift: [28,-45]
-        - ref: mirror_matrix_inner_home
-          shift: [7,-45]
-          # shift: [9,-45]
+        - ref: mirror_matrix_inner_bottom
+          shift: [28,-23]
+        - ref: mirror_matrix_inner_bottom
+          shift: [7,-23]
   # mcu_left:
   #   - what: rectangle
   #     size: [19,40]
@@ -210,26 +206,25 @@ outlines:
       # operation: stack
       points:
         - ref: matrix_inner_bottom
-          shift: [9,-8.5]
+          shift: [7,-8.5]
         - ref: matrix_inner_bottom
           shift: [28,-8.5]
-        - ref: matrix_inner_home
-          shift: [28,-45]
-        - ref: matrix_inner_home
-          shift: [9,-45]
-
+        - ref: matrix_inner_bottom
+          shift: [28,-23]
+        - ref: matrix_inner_bottom
+          shift: [7,-23]
   thumb_right:
     - what: polygon
       # operation: stack
       points:
         - ref: mirror_matrix_inner_bottom
-          shift: [9, -8.5]
+          shift: [7,-8.5]
         - ref: mirror_matrix_inner_bottom
-          shift: [28, -8.5]
-        - ref: mirror_matrix_inner_home
-          shift: [28, -45]
-        - ref: mirror_matrix_inner_home
-          shift: [9, -45]
+          shift: [28,-8.5]
+        - ref: mirror_matrix_inner_bottom
+          shift: [28,-23]
+        - ref: mirror_matrix_inner_bottom
+          shift: [7,-23]
 
   # ---- BOTTOM PLATE ----
   sockets:
